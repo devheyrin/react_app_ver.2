@@ -228,7 +228,28 @@ useState에 어떠한 값을 전달하면, 지금 만드는 state의 초기값�
 이 함수를 setNumber라는 변수로 저장해서 사용하기로 한다. 
 
 ```react
-function FuncComp(props){  var numberState = useState(props.initNumber);  var number = numberState[0];    //state를 바꿀 수 있는 함수를 setNumber라는 변수에 저장한다.   var setNumber = numberState[1];  console.log('state',numberState);  return (    <div className="container">      <h1>Function Style Comp</h1>      <p>Number : {number}</p>      <input           type="button"           value="random"          onClick={            function(){                // 바꾸고자 하는 값을 setNumber안에 인자로 넣어준다.               setNumber(Math.random())            }          }>        </input>    </div>    );}
+function FuncComp(props){  
+    var numberState = useState(props.initNumber);  
+    var number = numberState[0];    
+    //state를 바꿀 수 있는 함수를 setNumber라는 변수에 저장한다.   
+    var setNumber = numberState[1];  
+    console.log('state',numberState);  
+    return (    
+        <div className="container">      
+            <h1>Function Style Comp</h1>      
+            <p>Number : {number}</p>      
+            <input           
+                type="button"           
+                value="random"          
+                onClick={            
+                    function(){
+                        // 바꾸고자 하는 값을 setNumber안에 인자로 넣어준다.
+                        setNumber(Math.random())            
+                    }          
+                }>        
+            </input>    
+        </div>    
+    );}
 ```
 
 이제 클래스와 함수형 각각의 방법으로 날짜를 표시하도록 만들어 보자. 
@@ -236,7 +257,41 @@ function FuncComp(props){  var numberState = useState(props.initNumber);  var nu
 #### 클래스형
 
 ```react
-class ClassComp extends React.Component{  state = {    number:this.props.initNumber,      //시스템의 현재 날짜를 받아와서 date라는 state의 초기값으로 준다.     date: (new Date()).toString()  }  render(){    return (      <div className="container">        <h1>Class Style Comp</h1>        <p>Number : {this.state.number}</p>        <!--날짜가 들어갈 자리-->        <p>Date : {this.state.date}</p>        <input           type="button" value="random"          onClick={            function(){              this.setState({number:Math.random()})            }.bind(this)          }>        </input>    <!--버튼을 누를 때마다 시간이 갱신되도록 state를 변경한다-->        <input           type="button" value="date"          onClick={            function(){              this.setState({date:(new Date()).toString()})            }.bind(this)          }>        </input>      </div>    )  } }// end class 
+class ClassComp extends React.Component{  
+    state = {    
+        number:this.props.initNumber,      
+        //시스템의 현재 날짜를 받아와서 date라는 state의 초기값으로 준다.     
+        date: (new Date()).toString()  
+    }  
+render(){    
+    return (      
+        <div className="container">        
+            <h1>Class Style Comp</h1>        
+            <p>Number : {this.state.number}</p>        
+            <!--날짜가 들어갈 자리-->        
+            <p>Date : {this.state.date}</p>        
+            <input           
+                type="button" 
+                value="random"          
+                onClick={            
+                    function(){              
+                        this.setState({number:Math.random()})            
+                    }.bind(this)          
+                }>        
+            </input>    
+            <!--버튼을 누를 때마다 시간이 갱신되도록 state를 변경한다-->        
+            <input           
+                type="button"
+                value="date"          
+                onClick={            
+                    function(){              
+                        this.setState({date:(new Date()).toString()})            
+                    }.bind(this)          
+                }>        
+            </input>      
+        </div>    
+    )} 
+}// end class 
 ```
 
 #### 함수형
